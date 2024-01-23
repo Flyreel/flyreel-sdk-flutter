@@ -13,10 +13,10 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "initialize":
             
-            let arguments = call.arguments as [String: Any]
-            let organizationId = arguments["organizationId"] as String
-            let settingsVersion = arguments["settingsVersion"] as Int
-            let environmentString = arguments["environment"] as String
+            let arguments = call.arguments as! [String: Any]
+            let organizationId = arguments["organizationId"] as! String
+            let settingsVersion = arguments["settingsVersion"] as! Int
+            let environmentString = arguments["environment"] as! String
             
             let configuration = FlyreelConfiguration(
                 settingsVersion: String(settingsVersion),
@@ -27,7 +27,29 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
             FlyreelSDK.shared.set(configuration: configuration)
             result(nil)
         case "open":
-            FlyreelSDK.presentFlyreel(on: rootViewController)
+            guard let rootView = UIApplication.shared.keyWindow?.rootViewController else {
+                return result(FlutterMethodNotImplemented)
+            }
+            let arguments = call.arguments as! [String: Any]
+            let deeplink = arguments["deeplinkUrl"] as? String
+            let shouldSkipLoginPage = arguments["shouldSkipLoginPage"] as! Bool
+            
+            if let deeplinkURL = URL(string: deeplink ?? "") {
+                FlyreelSDK.shared.presentFlyreel(on: rootView, deepLinkURL: deeplinkURL, shouldSkipLoginPage: shouldSkipLoginPage)
+            } else {
+                FlyreelSDK.shared.presentFlyreel(on: rootView)
+            }
+            result(nil)
+        case "openWithCredentials":
+            guard let rootView = UIApplication.shared.keyWindow?.rootViewController else {
+                return result(FlutterMethodNotImplemented)
+            }
+            let arguments = call.arguments as! [String: Any]
+            let zipCode = arguments["zipCode"] as! String
+            let accessCode = arguments["accessCode"] as! String
+            let shouldSkipLoginPage = arguments["shouldSkipLoginPage"] as! Bool
+            FlyreelSDK.shared.presentFlyreel(on: rootView, zipCode: zipCode, accessCode: accessCode, shouldSkipLoginPage: shouldSkipLoginPage)
+            
             result(nil)
         case "enableDebugLogging":
             FlyreelSDK.shared.enableLogs()
@@ -37,14 +59,14 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    func mapEnvironment(environment: String) throws -> FlyreelEnvironment {
+    func mapEnvironment(environment: String) -> FlyreelEnvironment {
         switch environment {
         case "production":
-            return .Production
+            return .production
         case "sandbox":
-            return .Sandbox
+            return .sandbox
         default:
-            throw NSError(domain: "FlyreelSDK", code: 1, userInfo: [NSLocalizedDescriptionKey: "Wrong Flyreel environment"])
+            return .production
         }
     }
 }

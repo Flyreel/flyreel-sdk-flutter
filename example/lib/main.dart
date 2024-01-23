@@ -36,6 +36,12 @@ class _MyAppState extends State<MyApp> {
             onPressed: () async {
               Flyreel.enableDebugLogging();
               Flyreel.open();
+
+              // open with deeplink string
+              // Flyreel.open(deeplinkUrl: "https://your.custom.url/?flyreelAccessCode=6M4T0T&flyreelZipCode=80212");
+
+              // open with zipcode and access code
+              // Flyreel.openWithCredentials(zipCode: "80212", accessCode: "6M4T0T", shouldSkipLoginPage: false);
             },
           ),
         ),

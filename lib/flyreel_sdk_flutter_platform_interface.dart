@@ -27,7 +27,11 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
-  Future open() {
+  Future openWithCredentials({required String zipCode, required String accessCode, bool shouldSkipLoginPage = true}) {
+    throw UnimplementedError('open() has not been implemented.');
+  }
+
+  Future open({String? deeplinkUrl, bool shouldSkipLoginPage = true}) {
     throw UnimplementedError('open() has not been implemented.');
   }
 
@@ -48,7 +52,4 @@ class FlyreelConfig {
   });
 }
 
-enum FlyreelEnvironment {
-  production,
-  sandbox
-}
+enum FlyreelEnvironment { production, sandbox }

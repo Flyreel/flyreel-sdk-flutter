@@ -19,8 +19,24 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   }
 
   @override
-  Future open() async {
-    await methodChannel.invokeMethod('open');
+  Future openWithCredentials(
+      {required String zipCode,
+      required String accessCode,
+      bool shouldSkipLoginPage = true}) async {
+    await methodChannel.invokeMethod('openWithCredentials', {
+      'zipCode': zipCode,
+      'accessCode': accessCode,
+      'shouldSkipLoginPage': shouldSkipLoginPage,
+    });
+  }
+
+  @override
+  Future open(
+      {String? deeplinkUrl, bool shouldSkipLoginPage = true}) async {
+    await methodChannel.invokeMethod('open', {
+      'deeplinkUrl': deeplinkUrl,
+      'shouldSkipLoginPage': shouldSkipLoginPage,
+    });
   }
 
   @override

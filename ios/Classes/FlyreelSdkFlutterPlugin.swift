@@ -27,9 +27,7 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
             FlyreelSDK.shared.set(configuration: configuration)
             result(nil)
         case "open":
-            guard let rootView = UIApplication.shared.keyWindow?.rootViewController else {
-                return result(FlutterMethodNotImplemented)
-            }
+            let rootView = UIApplication.shared.delegate!.window!!.rootViewController!
             let arguments = call.arguments as! [String: Any]
             let deeplink = arguments["deeplinkUrl"] as? String
             let shouldSkipLoginPage = arguments["shouldSkipLoginPage"] as! Bool
@@ -41,9 +39,7 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
             }
             result(nil)
         case "openWithCredentials":
-            guard let rootView = UIApplication.shared.keyWindow?.rootViewController else {
-                return result(FlutterMethodNotImplemented)
-            }
+            let rootView = UIApplication.shared.delegate!.window!!.rootViewController!
             let arguments = call.arguments as! [String: Any]
             let zipCode = arguments["zipCode"] as! String
             let accessCode = arguments["accessCode"] as! String

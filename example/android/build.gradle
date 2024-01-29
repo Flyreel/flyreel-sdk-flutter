@@ -14,13 +14,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url "https://useast.jfrog.lexisnexisrisk.com/artifactory/frsdk-androidsdkfr"
-            credentials {
-                username "username"
-                password "password"
-            }
-        }
     }
 }
 

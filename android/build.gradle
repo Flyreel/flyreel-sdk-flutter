@@ -14,16 +14,12 @@ buildscript {
     }
 }
 
-allprojects {
+rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
         maven {
-            url "https://useast.jfrog.lexisnexisrisk.com/artifactory/frsdk-androidsdkfr"
-            credentials {
-                username "username"
-                password "password"
-            }
+            url "https://flyreelsdk.jfrog.io/artifactory/flyreel-androidsdk"
         }
     }
 }
@@ -75,5 +71,5 @@ android {
 }
 
 dependencies {
-    implementation 'lexisnexis.flyreel:android-sdk-stage:1.0.1'
+    implementation 'lexisnexis.flyreel:android-sdk-stage:1.0.0'
 }

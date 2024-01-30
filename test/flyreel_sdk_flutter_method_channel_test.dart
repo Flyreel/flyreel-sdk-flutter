@@ -31,8 +31,8 @@ void main() {
         null);
   });
 
-  test('enableDebugLogging', () async {
-    expect(await platform.enableDebugLogging(), null);
+  test('enableLogs', () async {
+    expect(await platform.enableLogs(), null);
   });
 
   test('open', () async {

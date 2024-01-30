@@ -40,7 +40,7 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   }
 
   @override
-  Future enableDebugLogging() async {
-    await methodChannel.invokeMethod('enableDebugLogging');
+  Future enableLogs() async {
+    await methodChannel.invokeMethod('enableLogs');
   }
 }

@@ -35,8 +35,8 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('open() has not been implemented.');
   }
 
-  Future enableDebugLogging() {
-    throw UnimplementedError('enableDebugLogging() has not been implemented.');
+  Future enableLogs() {
+    throw UnimplementedError('enableLogs() has not been implemented.');
   }
 }
 

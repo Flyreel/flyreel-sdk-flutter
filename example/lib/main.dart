@@ -12,7 +12,7 @@ void main() async {
   ));
 
   // show Flyreel logs
-  Flyreel.enableDebugLogging();
+  Flyreel.enableLogs();
   runApp(const MyApp());
 }
 

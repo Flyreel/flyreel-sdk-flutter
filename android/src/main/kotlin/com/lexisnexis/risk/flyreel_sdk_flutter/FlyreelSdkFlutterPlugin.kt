@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.Uri
 import com.lexisnexis.risk.flyreel.Flyreel
-import com.lexisnexis.risk.flyreel.FlyreelConfig
+import com.lexisnexis.risk.flyreel.FlyreelConfiguration
 import com.lexisnexis.risk.flyreel.FlyreelEnvironment
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -30,7 +30,7 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
                 val environment = arguments["environment"] as String
 
                 Flyreel.initialize(
-                    context as Application, FlyreelConfig(
+                    context as Application, FlyreelConfiguration(
                         organizationId = organizationId,
                         settingsVersion = settingsVersion,
                         environment = mapEnvironment(environment)
@@ -69,8 +69,8 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
                 } ?: result.notImplemented()
             }
 
-            "enableDebugLogging" -> {
-                Flyreel.enableDebugLogging()
+            "enableLogs" -> {
+                Flyreel.enableLogs()
                 result.success(null)
             }
 

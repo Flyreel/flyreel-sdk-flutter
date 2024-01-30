@@ -21,7 +21,7 @@ class Flyreel {
         shouldSkipLoginPage: shouldSkipLoginPage);
   }
 
-  static Future enableDebugLogging() async {
-    return FlyreelSdkFlutterPlatform.instance.enableDebugLogging();
+  static Future enableLogs() async {
+    return FlyreelSdkFlutterPlatform.instance.enableLogs();
   }
 }

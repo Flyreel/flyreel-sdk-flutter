@@ -8,7 +8,7 @@ class MockFlyreelSdkFlutterPlatform
     with MockPlatformInterfaceMixin
     implements FlyreelSdkFlutterPlatform {
   @override
-  Future enableDebugLogging() => Future.value();
+  Future enableLogs() => Future.value();
 
   @override
   Future initialize(FlyreelConfig config) => Future.value();
@@ -33,12 +33,12 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelFlyreelSdkFlutter>());
   });
 
-  test('enableDebugLogging', () async {
+  test('enableLogs', () async {
     MockFlyreelSdkFlutterPlatform fakePlatform =
         MockFlyreelSdkFlutterPlatform();
     FlyreelSdkFlutterPlatform.instance = fakePlatform;
 
-    expect(await Flyreel.enableDebugLogging(), null);
+    expect(await Flyreel.enableLogs(), null);
   });
 
   test('initialize', () async {

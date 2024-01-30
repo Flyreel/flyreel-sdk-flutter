@@ -47,7 +47,7 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
             FlyreelSDK.shared.presentFlyreel(on: rootView, zipCode: zipCode, accessCode: accessCode, shouldSkipLoginPage: shouldSkipLoginPage)
             
             result(nil)
-        case "enableDebugLogging":
+        case "enableLogs":
             FlyreelSDK.shared.enableLogs()
             result(nil)
         default:

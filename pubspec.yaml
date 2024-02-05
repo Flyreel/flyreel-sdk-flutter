@@ -1,7 +1,7 @@
 name: flyreel_sdk_flutter
-description: "A new Flutter plugin project."
+description: "Flyreel Flutter SDK"
 version: 0.0.1
-homepage:
+homepage: https://risk.lexisnexis.com/products/flyreel
 
 environment:
   sdk: '>=3.2.4 <4.0.0'

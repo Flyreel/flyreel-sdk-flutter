@@ -3,7 +3,7 @@
 [![Platform](https://img.shields.io/badge/platform-Android-orange.svg)](https://github.com/Flyreel/flyreel-sdk-android)
 [![Platform](https://img.shields.io/badge/platform-iOS-orange.svg)](https://github.com/Flyreel/flyreel-sdk-ios)
 [![Languages](https://img.shields.io/badge/language-Dart-orange.svg)](https://github.com/Flyreel/flyreel-sdk-android)
-[![GitHub release](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Flyreel/flyreel-sdk-flutter)
+[![GitHub release](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Flyreel/flyreel-sdk-flutter)
 
 ## Requirements:
 
@@ -25,7 +25,7 @@ This will add a line like this to your package's pubspec.yaml (and run an implic
 
 ```yaml
 dependencies:
-  flyreel_sdk_flutter: ^1.0.0
+  flyreel_sdk_flutter: ^0.0.1
 ```
 
 Alternatively, your editor might support flutter pub get. Check the docs for your editor to learn more.

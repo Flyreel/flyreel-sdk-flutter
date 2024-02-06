@@ -7,7 +7,7 @@ void main() async {
 
   // initialize Flyreel with organizationId and settingsVersion
   await Flyreel.initialize(FlyreelConfig(
-    organizationId: "5d3633f9103a930011996475",
+    organizationId: "your_organization_id",
     settingsVersion: 1,
   ));
 

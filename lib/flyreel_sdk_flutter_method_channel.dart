@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
+import 'flyreel_sdk_flutter.dart';
 import 'flyreel_sdk_flutter_platform_interface.dart';
 
 /// An implementation of [FlyreelSdkFlutterPlatform] that uses method channels.
@@ -19,10 +19,11 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   }
 
   @override
-  Future openWithCredentials(
-      {required String zipCode,
-      required String accessCode,
-      bool shouldSkipLoginPage = true}) async {
+  Future openWithCredentials({
+    required String zipCode,
+    required String accessCode,
+    bool shouldSkipLoginPage = true,
+  }) async {
     await methodChannel.invokeMethod('openWithCredentials', {
       'zipCode': zipCode,
       'accessCode': accessCode,
@@ -31,8 +32,10 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   }
 
   @override
-  Future open(
-      {String? deeplinkUrl, bool shouldSkipLoginPage = true}) async {
+  Future open({
+    String? deeplinkUrl,
+    bool shouldSkipLoginPage = true,
+  }) async {
     await methodChannel.invokeMethod('open', {
       'deeplinkUrl': deeplinkUrl,
       'shouldSkipLoginPage': shouldSkipLoginPage,

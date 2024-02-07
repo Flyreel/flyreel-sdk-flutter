@@ -1,5 +1,5 @@
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
+import 'flyreel_sdk_flutter.dart';
 import 'flyreel_sdk_flutter_method_channel.dart';
 
 abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
@@ -27,7 +27,11 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
-  Future openWithCredentials({required String zipCode, required String accessCode, bool shouldSkipLoginPage = true}) {
+  Future openWithCredentials({
+    required String zipCode,
+    required String accessCode,
+    bool shouldSkipLoginPage = true,
+  }) {
     throw UnimplementedError('open() has not been implemented.');
   }
 
@@ -39,17 +43,3 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('enableLogs() has not been implemented.');
   }
 }
-
-class FlyreelConfig {
-  final String organizationId;
-  final int settingsVersion;
-  final FlyreelEnvironment environment;
-
-  FlyreelConfig({
-    required this.organizationId,
-    required this.settingsVersion,
-    this.environment = FlyreelEnvironment.production,
-  });
-}
-
-enum FlyreelEnvironment { production, sandbox }

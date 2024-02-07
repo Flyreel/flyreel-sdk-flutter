@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter.dart';
-import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter_platform_interface.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

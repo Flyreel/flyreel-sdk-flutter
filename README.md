@@ -3,14 +3,16 @@
 [![Platform](https://img.shields.io/badge/platform-Android-orange.svg)](https://github.com/Flyreel/flyreel-sdk-android)
 [![Platform](https://img.shields.io/badge/platform-iOS-orange.svg)](https://github.com/Flyreel/flyreel-sdk-ios)
 [![Languages](https://img.shields.io/badge/language-Dart-orange.svg)](https://github.com/Flyreel/flyreel-sdk-android)
-[![GitHub release](https://img.shields.io/badge/version-0.0.1-blue.svg)](https://github.com/Flyreel/flyreel-sdk-flutter)
+[![GitHub release](https://img.shields.io/pub/v/flyreel_sdk_flutter?color=blue)](https://pub.dev/packages/flyreel_sdk_flutter)
 
 ## Requirements:
 
 ### Android
+
 - Android 6+ (minSdk 23)
 
 ### iOS
+
 - iOS 13+
 
 ## Installation
@@ -21,22 +23,14 @@
 $ flutter pub add flyreel_sdk_flutter
 ```
 
-This will add a line like this to your package's pubspec.yaml (and run an implicit flutter pub get):
-
-```yaml
-dependencies:
-  flyreel_sdk_flutter: ^0.0.1
-```
-
-Alternatively, your editor might support flutter pub get. Check the docs for your editor to learn more.
-
 ### Path dependency
 
 via ssh:
+
 ```yaml
-flyreel_sdk_flutter: 
-    git:
-      url: git@github.com:Flyreel/flyreel-sdk-flutter.git
+flyreel_sdk_flutter:
+  git:
+    url: git@github.com:Flyreel/flyreel-sdk-flutter.git
 ``` 
 
 or
@@ -44,9 +38,9 @@ or
 via https:
 
 ```yaml
-flyreel_sdk_flutter: 
-    git:
-      url: https://github.com/Flyreel/flyreel-sdk-flutter.git
+flyreel_sdk_flutter:
+  git:
+    url: https://github.com/Flyreel/flyreel-sdk-flutter.git
 ```
 
 ## Usage
@@ -71,7 +65,7 @@ void main() async {
     settingsVersion: 1,
   );
   await Flyreel.initialize(config);
-  
+
   runApp(const MyApp());
 }
 ```
@@ -94,15 +88,31 @@ user details can be provided automatically, use:
 ```dart
 void openFlyreelWithCredentials() async {
   await Flyreel.openWithCredentials(
-      zipCode: "80212",
-      accessCode: "6M4T0T",
+    zipCode: "80212",
+    accessCode: "6M4T0T",
   );
 }
 
 void openFlyreelWithUrl() async {
-  await Flyreel.open(deeplinkUrl:"https://your.custom.url/?flyreelAccessCode=6M4T0T&flyreelZipCode=80212");
+  await Flyreel.open(
+      deeplinkUrl: "https://your.custom.url/?flyreelAccessCode=6M4T0T&flyreelZipCode=80212");
 }
 ```
+
+### Custom fonts
+
+If you want to use a custom font for Flyreel chat, you have to provide a ttf file to both iOS and
+Android Platform.
+
+- in the Android directory, you can put the ttf file in the main/assets folder or the main/res/font
+  folder.
+- for iOS, you have to go with
+  the [Apple instruction](https://developer.apple.com/documentation/uikit/text_display_and_fonts/adding_a_custom_font_to_your_app)
+  to add a custom font to your project.
+
+Then, you can use the font's name in the Flyreel dashboard panel. For example, if you have added
+font **my_font.ttf** to the assets folder, you can use **my_font** as a font name in the Flyreel
+dashboard.
 
 ## Debug Logs
 
@@ -132,7 +142,7 @@ void main() async {
       application = this,
       configuration = configuration
   );
-  
+
   // ...
 }
 ```

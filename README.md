@@ -45,6 +45,23 @@ flyreel_sdk_flutter:
 
 ## Usage
 
+### Permissions on iOS
+
+Since the SDK actively uses some functionalities of the iOS system you need to provide a few
+permission settings in your Info.plist file.
+
+```xml
+<dict>
+    // ...
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to the camera.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to the camera.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need access to your location data</string>
+</dict>
+```
+
 ### Initialization
 
 To use the Flyreel SDK, you must provide a configuration with the following parameters:

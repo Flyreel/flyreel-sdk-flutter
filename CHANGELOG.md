@@ -1,3 +1,8 @@
+## 0.0.5
+
+* Updated SDKs(Android=1.0.2, iOS=1.0.4)
+* android - compileSdkVersion 34 is required
+
 ## 0.0.4
 
 * Updated SDKs

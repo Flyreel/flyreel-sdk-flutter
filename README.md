@@ -10,6 +10,7 @@
 ### Android
 
 - Android 6+ (minSdk 23)
+- compileSdkVersion 34
 
 ### iOS
 

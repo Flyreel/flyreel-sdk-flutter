@@ -82,15 +82,32 @@ class FlyreelConfig {
 /// Use this enum to specify the desired environment for the SDK.
 enum FlyreelEnvironment { production, sandbox }
 
+
+/// Represents the status check for a Flyreel instance.
+///
+/// This class is used to encapsulate the status and expiration information
+/// returned from a status check on a Flyreel instance. It includes two properties:
+/// `status` and `expiration`.
 class FlyreelCheckStatus {
+
+  /// The status of the Flyreel.
   final String status;
+
+  /// The expiration date for Flyreel.
   final String expiration;
 
+  /// Creates a new instance of the [FlyreelCheckStatus] class.
+  ///
+  /// Requires [status] and [expiration] as parameters.
   FlyreelCheckStatus({
     required this.status,
     required this.expiration,
   });
 
+  /// Creates a new instance of the [FlyreelCheckStatus] class from a map.
+  ///
+  /// This factory constructor allows for the creation of a [FlyreelCheckStatus] instance
+  /// from a map. The map must contain 'status' and 'expiration' keys.
   factory FlyreelCheckStatus.fromMap(Map<String, dynamic> map) {
     return FlyreelCheckStatus(
       status: map['status'],

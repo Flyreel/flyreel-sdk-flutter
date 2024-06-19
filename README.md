@@ -52,6 +52,7 @@ Since the SDK actively uses some functionalities of the iOS system you need to p
 permission settings in your Info.plist file.
 
 ```xml
+
 <dict>
     // ...
     <key>NSCameraUsageDescription</key>
@@ -133,6 +134,33 @@ font **my_font.ttf** to the assets folder, you can use **my_font** as a font nam
 dashboard.
 
 ## Debug Logs
+
+Enable debug logging for troubleshooting purposes:
+
+```dart
+void showLogs() async {
+  await Flyreel.enableLogs();
+}
+```
+
+## Check Flyreel status for given access and zip code
+
+You can manually check Flyreel status. This function makes a network request to retrieve the status
+of Flyreel for the specified zip code and access code.
+
+```dart
+void checkFlyreelStatus() async {
+  try {
+    final result = await Flyreel.checkStatus(
+      zipCode: "80212",
+      accessCode: "6M4T0T",
+    );
+    print("Status: ${result.status}, expires: ${result.expiration}");
+  } on PlatformException catch (e) {
+    print("code: ${e.code}, message: ${e.message}");
+  }
+}
+```
 
 Enable debug logging for troubleshooting purposes:
 

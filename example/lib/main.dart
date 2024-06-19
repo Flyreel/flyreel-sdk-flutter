@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                     ));
                   } on PlatformException catch (e) {
                     _messengerKey.currentState?.showSnackBar(SnackBar(
-                      content: Text("code: ${e.code}, message: ${e.message!}"),
+                      content: Text("code: ${e.code}, message: ${e.message}"),
                     ));
                   }
                 },

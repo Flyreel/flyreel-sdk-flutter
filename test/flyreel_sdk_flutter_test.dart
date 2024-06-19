@@ -23,6 +23,11 @@ class MockFlyreelSdkFlutterPlatform
           required String accessCode,
           bool shouldSkipLoginPage = true}) =>
       Future.value();
+
+  @override
+  Future<FlyreelCheckStatus> checkStatus({required String zipCode, required String accessCode}) {
+    return Future.value(FlyreelCheckStatus(status: "status", expiration: "expiration"));
+  }
 }
 
 void main() {
@@ -69,5 +74,15 @@ void main() {
         await Flyreel.openWithCredentials(
             zipCode: "zipCode", accessCode: "accessCode"),
         null);
+  });
+
+  test('checkStatus', () async {
+    MockFlyreelSdkFlutterPlatform fakePlatform =
+    MockFlyreelSdkFlutterPlatform();
+    FlyreelSdkFlutterPlatform.instance = fakePlatform;
+    final status = await Flyreel.checkStatus(zipCode: "zipCode", accessCode: "accessCode");
+
+    expect(status.status, "status");
+    expect(status.expiration, "expiration");
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter.dart';
 
 void main() async {
@@ -23,6 +24,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
@@ -31,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: _messengerKey,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flyreel plugin example'),
@@ -69,6 +73,28 @@ class _MyAppState extends State<MyApp> {
                       zipCode: "80212",
                       accessCode: "6M4T0T",
                       shouldSkipLoginPage: false);
+                },
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                child: const Text('Check status'),
+                onPressed: () async {
+                  // check status with zipcode and access code
+                  try {
+                    final result = await Flyreel.checkStatus(
+                      zipCode: "80212",
+                      accessCode: "6M4T0T",
+                    );
+                    _messengerKey.currentState?.showSnackBar(SnackBar(
+                      content: Text("Status: ${result.status}, expires: ${result.expiration}"),
+                    ));
+                  } on PlatformException catch (e) {
+                    _messengerKey.currentState?.showSnackBar(SnackBar(
+                      content: Text("code: ${e.code}, message: ${e.message}"),
+                    ));
+                  }
                 },
               ),
             ],

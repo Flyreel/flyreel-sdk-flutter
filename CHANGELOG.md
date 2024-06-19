@@ -1,3 +1,9 @@
+## 0.0.6
+
+* Updated SDKs(Android=1.0.3, iOS=1.0.7)
+* added statusCheck function to check Flyreel status
+* added better accessibility descriptions
+
 ## 0.0.5
 
 * Updated SDKs(Android=1.0.2, iOS=1.0.4)

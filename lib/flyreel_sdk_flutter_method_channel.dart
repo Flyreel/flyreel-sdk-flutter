@@ -46,4 +46,16 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   Future enableLogs() async {
     await methodChannel.invokeMethod('enableLogs');
   }
+
+  @override
+  Future<FlyreelCheckStatus> checkStatus({
+    required String zipCode,
+    required String accessCode,
+  }) async {
+    final value = await methodChannel.invokeMethod('checkStatus', {
+      'zipCode': zipCode,
+      'accessCode': accessCode,
+    });
+    return FlyreelCheckStatus.fromMap(value.cast<String, dynamic>());
+  }
 }

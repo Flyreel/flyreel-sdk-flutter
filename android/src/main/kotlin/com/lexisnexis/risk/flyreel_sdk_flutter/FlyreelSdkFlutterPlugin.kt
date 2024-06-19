@@ -69,6 +69,28 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
                 } ?: result.notImplemented()
             }
 
+            "checkStatus" -> {
+                val arguments = call.arguments as Map<*, *>
+                val zipCode = arguments["zipCode"] as String
+                val accessCode = arguments["accessCode"] as String
+
+                Flyreel.fetchFlyreelStatus(
+                    zipCode = zipCode,
+                    accessCode = accessCode,
+                    onSuccess = { status ->
+                        result.success(
+                            mapOf(
+                                "status" to status.status,
+                                "expiration" to status.expiration
+                            )
+                        )
+                    },
+                    onError = { error ->
+                        result.error(error.code.toString(), error.message, null)
+                    }
+                )
+            }
+
             "enableLogs" -> {
                 Flyreel.enableLogs()
                 result.success(null)

@@ -43,6 +43,16 @@ class Flyreel {
   static Future enableLogs() async {
     return FlyreelSdkFlutterPlatform.instance.enableLogs();
   }
+
+  /// Check status for zipcode/accessCode combination.
+  ///
+  /// Returns a [Future] that completes when logging is enabled.
+  static Future<FlyreelCheckStatus> checkStatus({
+    required String zipCode,
+    required String accessCode,
+  }) async {
+    return FlyreelSdkFlutterPlatform.instance.checkStatus(zipCode: zipCode, accessCode: accessCode);
+  }
 }
 
 /// Configuration for the Flyreel SDK.
@@ -71,3 +81,20 @@ class FlyreelConfig {
 /// The Flyreel SDK can operate in two environments: production and sandbox.
 /// Use this enum to specify the desired environment for the SDK.
 enum FlyreelEnvironment { production, sandbox }
+
+class FlyreelCheckStatus {
+  final String status;
+  final String expiration;
+
+  FlyreelCheckStatus({
+    required this.status,
+    required this.expiration,
+  });
+
+  factory FlyreelCheckStatus.fromMap(Map<String, dynamic> map) {
+    return FlyreelCheckStatus(
+      status: map['status'],
+      expiration: map['expiration'],
+    );
+  }
+}

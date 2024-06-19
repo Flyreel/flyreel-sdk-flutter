@@ -42,4 +42,11 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
   Future enableLogs() {
     throw UnimplementedError('enableLogs() has not been implemented.');
   }
+
+  Future<FlyreelCheckStatus> checkStatus({
+    required String zipCode,
+    required String accessCode,
+  }) {
+    throw UnimplementedError('checkStatus() has not been implemented.');
+  }
 }

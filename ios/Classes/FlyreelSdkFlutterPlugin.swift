@@ -50,6 +50,22 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
         case "enableLogs":
             FlyreelSDK.shared.enableLogs()
             result(nil)
+        case "checkStatus":
+            let arguments = call.arguments as! [String: Any]
+            let zipCode = arguments["zipCode"] as! String
+            let accessCode = arguments["accessCode"] as! String
+            FlyreelSDK.shared.fetchFlyreelStatus(zipCode: zipCode, accessCode: accessCode) { statusResult in
+                switch statusResult {
+                case .success(let flyreelStatus):
+                    result(["status": flyreelStatus.status, "expiration": flyreelStatus.expiration])
+                case .failure(let error):
+                    if case FlyreelError.apiError(let message, let code) = error {
+                        result(FlutterError(code: String(code), message: message, details: nil))
+                    } else {
+                        result(FlutterError(code: "500", message: "Unexpected error", details: nil))
+                    }
+                }
+            }
         default:
             result(FlutterMethodNotImplemented)
         }

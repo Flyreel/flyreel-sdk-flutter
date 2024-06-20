@@ -51,7 +51,8 @@ class Flyreel {
     required String zipCode,
     required String accessCode,
   }) async {
-    return FlyreelSdkFlutterPlatform.instance.checkStatus(zipCode: zipCode, accessCode: accessCode);
+    return FlyreelSdkFlutterPlatform.instance
+        .checkStatus(zipCode: zipCode, accessCode: accessCode);
   }
 }
 
@@ -82,14 +83,12 @@ class FlyreelConfig {
 /// Use this enum to specify the desired environment for the SDK.
 enum FlyreelEnvironment { production, sandbox }
 
-
 /// Represents the status check for a Flyreel instance.
 ///
 /// This class is used to encapsulate the status and expiration information
 /// returned from a status check on a Flyreel instance. It includes two properties:
 /// `status` and `expiration`.
 class FlyreelCheckStatus {
-
   /// The status of the Flyreel.
   final String status;
 

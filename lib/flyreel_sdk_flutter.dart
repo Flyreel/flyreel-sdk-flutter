@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'flyreel_sdk_flutter_platform_interface.dart';
 
 /// A class that provides methods to interact with the Flyreel SDK.
@@ -77,11 +79,26 @@ class FlyreelConfig {
   });
 }
 
+/// Annotation to indicate internal API usage.
+@immutable
+class FlyreelInternalApi {
+  final String message;
+  final Level level;
+
+  const FlyreelInternalApi({this.message = "Only for Flyreel internal use", this.level = Level.error});
+}
+
+/// Defines levels of API restriction.
+enum Level {
+  error,
+  warning,
+}
+
 /// Enum representing different environments for the Flyreel SDK.
 ///
 /// The Flyreel SDK can operate in two environments: production and sandbox.
 /// Use this enum to specify the desired environment for the SDK.
-enum FlyreelEnvironment { production, sandbox }
+enum FlyreelEnvironment { production, sandbox, @FlyreelInternalApi() staging }
 
 /// Represents the status check for a Flyreel instance.
 ///

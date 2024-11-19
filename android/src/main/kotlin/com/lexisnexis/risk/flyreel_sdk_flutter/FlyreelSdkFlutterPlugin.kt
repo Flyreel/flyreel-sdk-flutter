@@ -104,6 +104,7 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
         when (environment) {
             "production" -> FlyreelEnvironment.Production
             "sandbox" -> FlyreelEnvironment.Sandbox
+            "staging" -> FlyreelEnvironment.Staging
             else -> throw Exception("Wrong Flyreel environment")
         }
 

@@ -77,6 +77,8 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
             return .production
         case "sandbox":
             return .sandbox
+        case "staging":
+            return .staging
         default:
             return .production
         }

@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import Flyreel
+@_spi(FlyreelInternal) import Flyreel
 
 public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
     public static func register(with registrar: FlutterPluginRegistrar) {
@@ -71,6 +71,7 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
         }
     }
     
+ 
     func mapEnvironment(environment: String) -> FlyreelEnvironment {
         switch environment {
         case "production":

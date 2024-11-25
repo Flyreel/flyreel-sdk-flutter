@@ -131,8 +131,8 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.S
         channel.setMethodCallHandler(null)
         context = null
         eventSink = null
-        eventChannel = null
         eventChannel?.setStreamHandler(null)
+        eventChannel = null
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {

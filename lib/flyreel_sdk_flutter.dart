@@ -147,7 +147,7 @@ class FlyreelAnalyticEvent {
   final FlyreelAnalyticUser user;
   final String name;
   final String timestamp;
-  final int? activeTime;
+  final double? activeTime;
   final FlyreelCoordination? coordination;
   final FlyreelDeviceData? deviceData;
   final FlyreelMessageDetails? messageDetails;
@@ -170,7 +170,7 @@ class FlyreelAnalyticEvent {
           castedJson['user'].cast<String, dynamic>()),
       name: castedJson['name'] as String,
       timestamp: castedJson['timestamp'] as String,
-      activeTime: castedJson['activeTime'] as int?,
+      activeTime: castedJson['activeTime'] as double?,
       coordination: castedJson['coordination'] != null
           ? FlyreelCoordination.fromJson(
               castedJson['coordination'].cast<String, dynamic>())
@@ -202,7 +202,7 @@ class FlyreelAnalyticUser {
   final String botName;
   final String organizationId;
   final String status;
-  final FlyreelLoginType loginType;
+  final FlyreelLoginType? loginType;
 
   FlyreelAnalyticUser({
     required this.id,
@@ -225,7 +225,7 @@ class FlyreelAnalyticUser {
       organizationId: json['organizationId'] as String,
       status: json['status'] as String,
       loginType:
-          FlyreelLoginTypeExtension.fromValue(json['loginType'] as String),
+          FlyreelLoginTypeExtension.fromValue(json['loginType'] as String?),
     );
   }
 
@@ -237,7 +237,7 @@ class FlyreelAnalyticUser {
 }
 
 class FlyreelDeviceData {
-  final String phoneManufacturer;
+  final String? phoneManufacturer;
   final String phoneModel;
   final String appVersion;
   final String appName;
@@ -251,7 +251,7 @@ class FlyreelDeviceData {
 
   factory FlyreelDeviceData.fromJson(Map<String, dynamic> json) {
     return FlyreelDeviceData(
-      phoneManufacturer: json['phoneManufacturer'] as String,
+      phoneManufacturer: json['phoneManufacturer'] as String?,
       phoneModel: json['phoneModel'] as String,
       appVersion: json['appVersion'] as String,
       appName: json['appName'] as String,
@@ -332,14 +332,14 @@ extension FlyreelLoginTypeExtension on FlyreelLoginType {
     }
   }
 
-  static FlyreelLoginType fromValue(String value) {
+  static FlyreelLoginType? fromValue(String? value) {
     switch (value) {
       case 'manual_login':
         return FlyreelLoginType.manual;
       case 'deeplink_login':
         return FlyreelLoginType.deeplink;
       default:
-        throw ArgumentError('Unknown FlyreelLoginType value: $value');
+        return null;
     }
   }
 }

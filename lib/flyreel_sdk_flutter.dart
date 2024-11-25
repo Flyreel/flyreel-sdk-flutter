@@ -165,12 +165,13 @@ class FlyreelAnalyticEvent {
   // Factory constructor for creating an instance from a map
   factory FlyreelAnalyticEvent.fromJson(Map<Object?, Object?> json) {
     final Map<String, dynamic> castedJson = Map<String, dynamic>.from(json);
+    final num? activeTime = castedJson['activeTime'];
     return FlyreelAnalyticEvent(
       user: FlyreelAnalyticUser.fromJson(
           castedJson['user'].cast<String, dynamic>()),
       name: castedJson['name'] as String,
       timestamp: castedJson['timestamp'] as String,
-      activeTime: castedJson['activeTime'] as double?,
+      activeTime: activeTime?.toDouble(),
       coordination: castedJson['coordination'] != null
           ? FlyreelCoordination.fromJson(
               castedJson['coordination'].cast<String, dynamic>())

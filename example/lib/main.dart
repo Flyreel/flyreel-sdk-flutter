@@ -13,6 +13,12 @@ void main() async {
 
   // show Flyreel logs
   Flyreel.enableLogs();
+
+  // observe analytic events
+  Flyreel.observeAnalyticEvents().listen((event) {
+    debugPrint("event: ${event.toString()}");
+  });
+
   runApp(const MyApp());
 }
 

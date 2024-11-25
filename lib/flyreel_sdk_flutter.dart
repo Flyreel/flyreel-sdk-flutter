@@ -56,6 +56,10 @@ class Flyreel {
     return FlyreelSdkFlutterPlatform.instance
         .checkStatus(zipCode: zipCode, accessCode: accessCode);
   }
+
+  static Stream<FlyreelAnalyticEvent> observeAnalyticEvents() {
+    return FlyreelSdkFlutterPlatform.instance.observeAnalyticStream();
+  }
 }
 
 /// Configuration for the Flyreel SDK.
@@ -85,7 +89,9 @@ class FlyreelInternalApi {
   final String message;
   final Level level;
 
-  const FlyreelInternalApi({this.message = "Only for Flyreel internal use", this.level = Level.error});
+  const FlyreelInternalApi(
+      {this.message = "Only for Flyreel internal use",
+      this.level = Level.error});
 }
 
 /// Defines levels of API restriction.
@@ -98,7 +104,12 @@ enum Level {
 ///
 /// The Flyreel SDK can operate in two environments: production and sandbox.
 /// Use this enum to specify the desired environment for the SDK.
-enum FlyreelEnvironment { production, sandbox, @FlyreelInternalApi() staging }
+enum FlyreelEnvironment {
+  production,
+  sandbox,
+  @FlyreelInternalApi()
+  staging
+}
 
 /// Represents the status check for a Flyreel instance.
 ///
@@ -129,5 +140,206 @@ class FlyreelCheckStatus {
       status: map['status'],
       expiration: map['expiration'],
     );
+  }
+}
+
+class FlyreelAnalyticEvent {
+  final FlyreelAnalyticUser user;
+  final String name;
+  final String timestamp;
+  final int? activeTime;
+  final FlyreelCoordination? coordination;
+  final FlyreelDeviceData? deviceData;
+  final FlyreelMessageDetails? messageDetails;
+
+  FlyreelAnalyticEvent({
+    required this.user,
+    required this.name,
+    required this.timestamp,
+    this.activeTime,
+    this.coordination,
+    this.deviceData,
+    this.messageDetails,
+  });
+
+  // Factory constructor for creating an instance from a map
+  factory FlyreelAnalyticEvent.fromJson(Map<Object?, Object?> json) {
+    final Map<String, dynamic> castedJson = Map<String, dynamic>.from(json);
+    return FlyreelAnalyticEvent(
+      user: FlyreelAnalyticUser.fromJson(
+          castedJson['user'].cast<String, dynamic>()),
+      name: castedJson['name'] as String,
+      timestamp: castedJson['timestamp'] as String,
+      activeTime: castedJson['activeTime'] as int?,
+      coordination: castedJson['coordination'] != null
+          ? FlyreelCoordination.fromJson(
+              castedJson['coordination'].cast<String, dynamic>())
+          : null,
+      deviceData: castedJson['deviceData'] != null
+          ? FlyreelDeviceData.fromJson(
+              castedJson['deviceData'].cast<String, dynamic>())
+          : null,
+      messageDetails: castedJson['messageDetails'] != null
+          ? FlyreelMessageDetails.fromJson(
+              castedJson['messageDetails'].cast<String, dynamic>())
+          : null,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FlyreelAnalyticEvent(user: $user, name: $name, timestamp: $timestamp, '
+        'activeTime: $activeTime, coordination: $coordination, '
+        'deviceData: $deviceData, messageDetails: $messageDetails)';
+  }
+}
+
+class FlyreelAnalyticUser {
+  final String id;
+  final String name;
+  final String email;
+  final String botId;
+  final String botName;
+  final String organizationId;
+  final String status;
+  final FlyreelLoginType loginType;
+
+  FlyreelAnalyticUser({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.botId,
+    required this.botName,
+    required this.organizationId,
+    required this.status,
+    required this.loginType,
+  });
+
+  factory FlyreelAnalyticUser.fromJson(Map<String, dynamic> json) {
+    return FlyreelAnalyticUser(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      botId: json['botId'] as String,
+      botName: json['botName'] as String,
+      organizationId: json['organizationId'] as String,
+      status: json['status'] as String,
+      loginType:
+          FlyreelLoginTypeExtension.fromValue(json['loginType'] as String),
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FlyreelAnalyticUser(id: $id, name: $name, email: $email, botId: $botId, '
+        'botName: $botName, organizationId: $organizationId, status: $status, loginType: $loginType)';
+  }
+}
+
+class FlyreelDeviceData {
+  final String phoneManufacturer;
+  final String phoneModel;
+  final String appVersion;
+  final String appName;
+
+  FlyreelDeviceData({
+    required this.phoneManufacturer,
+    required this.phoneModel,
+    required this.appVersion,
+    required this.appName,
+  });
+
+  factory FlyreelDeviceData.fromJson(Map<String, dynamic> json) {
+    return FlyreelDeviceData(
+      phoneManufacturer: json['phoneManufacturer'] as String,
+      phoneModel: json['phoneModel'] as String,
+      appVersion: json['appVersion'] as String,
+      appName: json['appName'] as String,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FlyreelDeviceData(phoneManufacturer: $phoneManufacturer, phoneModel: $phoneModel, '
+        'appVersion: $appVersion, appName: $appName)';
+  }
+}
+
+class FlyreelCoordination {
+  final double lat;
+  final double lng;
+
+  FlyreelCoordination({
+    required this.lat,
+    required this.lng,
+  });
+
+  factory FlyreelCoordination.fromJson(Map<String, dynamic> json) {
+    return FlyreelCoordination(
+      lat: json['lat'] as double,
+      lng: json['lng'] as double,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FlyreelCoordination(lat: $lat, lng: $lng)';
+  }
+}
+
+class FlyreelMessageDetails {
+  final String? message;
+  final String? messageType;
+  final String? moduleKey;
+  final String? messageKey;
+
+  FlyreelMessageDetails({
+    this.message,
+    this.messageType,
+    this.moduleKey,
+    this.messageKey,
+  });
+
+  factory FlyreelMessageDetails.fromJson(Map<String, dynamic> json) {
+    return FlyreelMessageDetails(
+      message: json['message'] as String?,
+      messageType: json['messageType'] as String?,
+      moduleKey: json['moduleKey'] as String?,
+      messageKey: json['messageKey'] as String?,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'FlyreelMessageDetails(message: $message, messageType: $messageType, '
+        'moduleKey: $moduleKey, messageKey: $messageKey)';
+  }
+
+}
+
+enum FlyreelLoginType {
+  manual,
+  deeplink,
+}
+
+extension FlyreelLoginTypeExtension on FlyreelLoginType {
+  String get value {
+    switch (this) {
+      case FlyreelLoginType.manual:
+        return 'manual_login';
+      case FlyreelLoginType.deeplink:
+        return 'deeplink_login';
+    }
+  }
+
+  static FlyreelLoginType fromValue(String value) {
+    switch (value) {
+      case 'manual_login':
+        return FlyreelLoginType.manual;
+      case 'deeplink_login':
+        return FlyreelLoginType.deeplink;
+      default:
+        throw ArgumentError('Unknown FlyreelLoginType value: $value');
+    }
   }
 }

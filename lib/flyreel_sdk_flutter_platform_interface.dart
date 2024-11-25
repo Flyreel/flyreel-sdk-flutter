@@ -49,4 +49,8 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
   }) {
     throw UnimplementedError('checkStatus() has not been implemented.');
   }
+
+  Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
+    throw UnimplementedError('observeAnalyticStream() has not been implemented.');
+  }
 }

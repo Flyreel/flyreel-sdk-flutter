@@ -9,6 +9,9 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('flyreel_sdk_flutter');
 
+  @visibleForTesting
+  final eventChannel = const EventChannel('flyreel_sdk_stream');
+
   @override
   Future initialize(FlyreelConfig config) async {
     await methodChannel.invokeMethod('initialize', {
@@ -57,5 +60,10 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
       'accessCode': accessCode,
     });
     return FlyreelCheckStatus.fromMap(value.cast<String, dynamic>());
+  }
+
+  @override
+  Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
+    return eventChannel.receiveBroadcastStream().map((event) => FlyreelAnalyticEvent.fromJson(event));
   }
 }

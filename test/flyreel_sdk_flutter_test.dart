@@ -1,7 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter.dart';
-import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter_platform_interface.dart';
 import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter_method_channel.dart';
+import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter_platform_interface.dart';
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockFlyreelSdkFlutterPlatform
@@ -25,8 +26,29 @@ class MockFlyreelSdkFlutterPlatform
       Future.value();
 
   @override
-  Future<FlyreelCheckStatus> checkStatus({required String zipCode, required String accessCode}) {
-    return Future.value(FlyreelCheckStatus(status: "status", expiration: "expiration"));
+  Future<FlyreelCheckStatus> checkStatus(
+      {required String zipCode, required String accessCode}) {
+    return Future.value(
+        FlyreelCheckStatus(status: "status", expiration: "expiration"));
+  }
+
+  @override
+  Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
+    return Stream.value(
+      FlyreelAnalyticEvent(
+          user: FlyreelAnalyticUser(
+            id: '1',
+            name: "name",
+            email: 'flyreel@flyreel.com',
+            botId: '1',
+            botName: 'botName',
+            organizationId: 'someId',
+            status: '',
+            loginType: null,
+          ),
+          name: 'name',
+          timestamp: '0'),
+    );
   }
 }
 
@@ -78,11 +100,21 @@ void main() {
 
   test('checkStatus', () async {
     MockFlyreelSdkFlutterPlatform fakePlatform =
-    MockFlyreelSdkFlutterPlatform();
+        MockFlyreelSdkFlutterPlatform();
     FlyreelSdkFlutterPlatform.instance = fakePlatform;
-    final status = await Flyreel.checkStatus(zipCode: "zipCode", accessCode: "accessCode");
+    final status =
+        await Flyreel.checkStatus(zipCode: "zipCode", accessCode: "accessCode");
 
     expect(status.status, "status");
     expect(status.expiration, "expiration");
+  });
+
+  test('observeAnalyticStream', () async {
+    MockFlyreelSdkFlutterPlatform fakePlatform = MockFlyreelSdkFlutterPlatform();
+    FlyreelSdkFlutterPlatform.instance = fakePlatform;
+    final event = await Flyreel.observeAnalyticEvents().first;
+
+    expect(event.name, "name");
+    expect(event.user.id, "1");
   });
 }

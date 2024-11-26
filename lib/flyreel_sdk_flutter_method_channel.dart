@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'flyreel_sdk_flutter.dart';
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
 import 'flyreel_sdk_flutter_platform_interface.dart';
 
 /// An implementation of [FlyreelSdkFlutterPlatform] that uses method channels.
@@ -8,6 +8,9 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('flyreel_sdk_flutter');
+
+  @visibleForTesting
+  final eventChannel = const EventChannel('flyreel_sdk_stream');
 
   @override
   Future initialize(FlyreelConfig config) async {
@@ -57,5 +60,12 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
       'accessCode': accessCode,
     });
     return FlyreelCheckStatus.fromMap(value.cast<String, dynamic>());
+  }
+
+  @override
+  Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
+    return eventChannel
+        .receiveBroadcastStream()
+        .map((event) => FlyreelAnalyticEvent.fromJson(event));
   }
 }

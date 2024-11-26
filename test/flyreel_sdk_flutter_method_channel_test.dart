@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter.dart';
 import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter_method_channel.dart';
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

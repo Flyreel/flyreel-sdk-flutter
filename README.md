@@ -75,6 +75,9 @@ To use the Flyreel SDK, you must provide a configuration with the following para
 In your lib/main.dart file, initialize Flyreel using provided object:
 
 ```dart
+import 'package:flyreel_sdk_flutter/flyreel_sdk_flutter.dart'; // import Flyreel SDK
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart'; // import Flyreel SDK models
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -191,4 +194,33 @@ void main() async {
 
   // ...
 }
+```
+
+## Analytics
+
+```dart
+/// Subscribes to a stream of analytic events and handles each event with a provided closure.
+///
+/// This function observes a feed of analytic events from the SDK. When an event
+/// is received, the provided handler closure is called with the event as its argument.
+///
+/// - Parameters:
+///   - handler: A closure that is called with the analytic event emitted by the SDK.
+///     The closure takes a single parameter:
+///       - event: A `FlyreelAnalyticEvent` type that contains event's data.
+///       
+void observeFlyreelAnalytics() async {
+  Flyreel.observeAnalyticEvents().listen((event) {
+    debugPrint("event: ${event.toString()}");
+  });
+}
+```
+
+## Firewall whitelisting
+
+Here is a list of Flyreel's hosts in case you need to whitelist URLs.
+
+```
+api3.flyreel.co
+sandbox.api3.flyreel.co
 ```

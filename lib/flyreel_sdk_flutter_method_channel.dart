@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'flyreel_sdk_flutter.dart';
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
 import 'flyreel_sdk_flutter_platform_interface.dart';
 
 /// An implementation of [FlyreelSdkFlutterPlatform] that uses method channels.
@@ -64,6 +64,8 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
 
   @override
   Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
-    return eventChannel.receiveBroadcastStream().map((event) => FlyreelAnalyticEvent.fromJson(event));
+    return eventChannel
+        .receiveBroadcastStream()
+        .map((event) => FlyreelAnalyticEvent.fromJson(event));
   }
 }

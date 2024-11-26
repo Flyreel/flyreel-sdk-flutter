@@ -1,5 +1,5 @@
+import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'flyreel_sdk_flutter.dart';
 import 'flyreel_sdk_flutter_method_channel.dart';
 
 abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
@@ -51,6 +51,7 @@ abstract class FlyreelSdkFlutterPlatform extends PlatformInterface {
   }
 
   Stream<FlyreelAnalyticEvent> observeAnalyticStream() {
-    throw UnimplementedError('observeAnalyticStream() has not been implemented.');
+    throw UnimplementedError(
+        'observeAnalyticStream() has not been implemented.');
   }
 }

@@ -1,3 +1,9 @@
+## 0.1.0
+
+* Updated SDKs(Android=1.1.1, iOS=1.1.2)
+* Added analytics events handler 
+* Moved models to a separate file - please add import 'package:flyreel_sdk_flutter/flyreel_sdk_models.dart';
+
 ## 0.0.6
 
 * Updated SDKs(Android=1.0.3, iOS=1.0.7)

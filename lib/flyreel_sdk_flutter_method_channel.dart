@@ -16,7 +16,6 @@ class MethodChannelFlyreelSdkFlutter extends FlyreelSdkFlutterPlatform {
   Future initialize(FlyreelConfig config) async {
     await methodChannel.invokeMethod('initialize', {
       'organizationId': config.organizationId,
-      'settingsVersion': config.settingsVersion,
       'environment': config.environment.name,
     });
   }

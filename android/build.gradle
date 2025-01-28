@@ -71,5 +71,5 @@ android {
 }
 
 dependencies {
-    implementation 'lexisnexis.flyreel:android-sdk:1.1.1'
+    implementation 'lexisnexis.flyreel:android-sdk:1.1.2'
 }

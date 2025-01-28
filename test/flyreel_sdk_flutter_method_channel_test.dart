@@ -26,8 +26,8 @@ void main() {
 
   test('initialize', () async {
     expect(
-        await platform.initialize(FlyreelConfig(
-            organizationId: "organizationId", settingsVersion: 1)),
+        await platform
+            .initialize(FlyreelConfig(organizationId: "organizationId")),
         null);
   });
 

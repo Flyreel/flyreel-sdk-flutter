@@ -1,6 +1,6 @@
 name: flyreel_sdk_flutter
 description: "Flutter plugin for Flyreel SDK - an advanced property survey solution for U.S. insurance carriers."
-version: 0.1.0
+version: 0.1.1
 homepage: https://flyreel.co
 
 environment:

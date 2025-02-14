@@ -3,20 +3,16 @@ import 'package:flutter/widgets.dart';
 /// Configuration for the Flyreel SDK.
 ///
 /// This class contains parameters required to configure the Flyreel SDK,
-/// including the organization ID, settings version, and environment.
+/// including the organization ID, and environment.
 class FlyreelConfig {
   /// The organization ID associated with the Flyreel configuration.
   final String organizationId;
-
-  /// The version of the settings used by the Flyreel SDK.
-  final int settingsVersion;
 
   /// The environment for the Flyreel SDK (production or sandbox).
   final FlyreelEnvironment environment;
 
   FlyreelConfig({
     required this.organizationId,
-    required this.settingsVersion,
     this.environment = FlyreelEnvironment.production,
   });
 }

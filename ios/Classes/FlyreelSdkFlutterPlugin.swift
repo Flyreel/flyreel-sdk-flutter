@@ -18,11 +18,9 @@ public class FlyreelSdkFlutterPlugin: NSObject, FlutterPlugin {
         case "initialize":
             let arguments = call.arguments as! [String: Any]
             let organizationId = arguments["organizationId"] as! String
-            let settingsVersion = arguments["settingsVersion"] as! Int
             let environmentString = arguments["environment"] as! String
             
             let configuration = FlyreelConfiguration(
-                settingsVersion: String(settingsVersion),
                 organizationId: organizationId,
                 environment: mapEnvironment(environment: environmentString)
             )

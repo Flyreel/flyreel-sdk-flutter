@@ -34,13 +34,11 @@ class FlyreelSdkFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.S
             "initialize" -> {
                 val arguments = call.arguments as Map<*, *>
                 val organizationId = arguments["organizationId"] as String
-                val settingsVersion = arguments["settingsVersion"] as Int
                 val environment = arguments["environment"] as String
 
                 Flyreel.initialize(
                     context as Application, FlyreelConfiguration(
                         organizationId = organizationId,
-                        settingsVersion = settingsVersion,
                         environment = mapEnvironment(environment)
                     )
                 )

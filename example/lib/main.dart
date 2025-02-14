@@ -9,7 +9,6 @@ void main() async {
   // initialize Flyreel with organizationId and settingsVersion
   await Flyreel.initialize(FlyreelConfig(
     organizationId: "your_organization_id",
-    settingsVersion: 1,
   ));
 
   // show Flyreel logs
@@ -78,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                   // open with zipcode and access code
                   await Flyreel.openWithCredentials(
                       zipCode: "80212",
-                      accessCode: "6M4T0T",
+                      accessCode: "779901",
                       shouldSkipLoginPage: false);
                 },
               ),
@@ -92,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                   try {
                     final result = await Flyreel.checkStatus(
                       zipCode: "80212",
-                      accessCode: "6M4T0T",
+                      accessCode: "779901",
                     );
                     _messengerKey.currentState?.showSnackBar(SnackBar(
                       content: Text("Status: ${result.status}, expires: ${result.expiration}"),

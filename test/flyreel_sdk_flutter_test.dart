@@ -74,8 +74,8 @@ void main() {
     FlyreelSdkFlutterPlatform.instance = fakePlatform;
 
     expect(
-        await Flyreel.initialize(FlyreelConfig(
-            organizationId: "organizationId", settingsVersion: 3)),
+        await Flyreel.initialize(
+            FlyreelConfig(organizationId: "organizationId")),
         null);
   });
 
@@ -110,7 +110,8 @@ void main() {
   });
 
   test('observeAnalyticStream', () async {
-    MockFlyreelSdkFlutterPlatform fakePlatform = MockFlyreelSdkFlutterPlatform();
+    MockFlyreelSdkFlutterPlatform fakePlatform =
+        MockFlyreelSdkFlutterPlatform();
     FlyreelSdkFlutterPlatform.instance = fakePlatform;
     final event = await Flyreel.observeAnalyticEvents().first;
 

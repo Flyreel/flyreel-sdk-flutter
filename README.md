@@ -68,8 +68,6 @@ permission settings in your Info.plist file.
 
 To use the Flyreel SDK, you must provide a configuration with the following parameters:
 
-`settingsVersion`: Identifier of your remote SDK settings.
-
 `organizationId`: Identifier of your organization.
 
 In your lib/main.dart file, initialize Flyreel using provided object:
@@ -84,7 +82,6 @@ void main() async {
   // initialize Flyreel with organizationId and settingsVersion
   var config = FlyreelConfig(
     organizationId: "5d3633f9103a930011996475",
-    settingsVersion: 1,
   );
   await Flyreel.initialize(config);
 
@@ -183,7 +180,6 @@ void main() async {
   // ...
   var configuration = FlyreelConfiguration(
       organizationId = "7d3899f1421a7650241516475",
-      settingsVersion = 1,
       environment = FlyreelEnvironment.Sandbox
   );
 

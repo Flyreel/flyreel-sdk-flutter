@@ -1,3 +1,6 @@
+## 0.1.3
+* Updated SDKs(Android=1.1.5, iOS=1.1.5)
+
 ## 0.1.2
 * updated readme
 

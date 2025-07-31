@@ -3,16 +3,26 @@ name: Notify Docusaurus Repo
 on:
   push:
     branches:
-      - "autobuild-*" # Remove this after done with testing.
+      - "autobuild-*"
       - develop
       - main
+
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Docusaurus Update
         run: |
-          curl -X POST -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.DOCUSAURUS_PAT }}" \
-          --data '{"event_type": "sdk_update", "client_payload": { "repo": "'"${{ github.repository }}"'" }}' \
-          https://api.github.com/repos/Flyreel/flyreel-sdk-docs/dispatches
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.DOCUSAURUS_PAT }}" \
+            --data '{
+              "event_type":"sdk_update",
+              "client_payload":{
+                "source_repo":"'"${{ github.repository }}"'",
+                "ref":"'"${{ github.ref }}"'",
+                "sha":"'"${{ github.sha }}"'"
+              }
+            }' \
+            https://api.github.com/repos/Flyreel/flyreel-sdk-docs/dispatches
